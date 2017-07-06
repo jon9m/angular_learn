@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <p>
+    servers works!
+  </p>
+
+  <app-server></app-server>
+  <app-server></app-server>
+
+  <button class="btn btn-primary" [disabled]="serverName===''" (click)="OnCreateServer();serverName=''">
+    Add server
+  </button>
+
+  <input type="text" [(ngModel)]="serverName" />
+
+  <div [ngStyle]="{'background-color':getColor()}">
+    <p [ngClass]="{online: serverCreated === true}" *ngIf="serverCreated; else noServerMarker" [innerText]="serverCreatedStatus"></p>
+    <ng-template #noServerMarker>
+      <p>No servers created</p>
+    </ng-template>
+  </div>
+
+
+  <p *ngFor="let server of serversList">{{server}}</p>
+
+</div>
