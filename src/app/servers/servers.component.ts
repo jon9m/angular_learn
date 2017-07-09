@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-servers',
   templateUrl: './servers.component.html',
-   styles: [`
+  styles: [`
             .online {
                 color: white;
             }
@@ -13,11 +13,20 @@ export class ServersComponent implements OnInit {
   serverCreatedStatus: string = "Server Not Created!";
   allowAddServer: boolean = false;
   serverName = "";
-  serverCreated:boolean = false;
+  serverCreated: boolean = false;
 
-  serversList = ["Tomcat","weblogic","Apache"];
+  @ViewChild('serverNameInputLocalRef') nameInput: ElementRef;
 
-  constructor() {
+  @Output('createServerEvent') serverCreatedEmitter = new EventEmitter<{ serverName: string, serverType: String, serverStatus: String }>();
+
+  onAddServer(serverNameInputLocalRef:HTMLInputElement) {
+    // this.serverCreatedEmitter.emit({ serverName: this.serverName, serverType: "web", serverStatus: "Offline" });    
+    //this.serverCreatedEmitter.emit({ serverName: serverNameInputLocalRef.value, serverType: "web", serverStatus: "Offline" });    
+
+    this.serverCreatedEmitter.emit({ serverName: this.nameInput.nativeElement.value, serverType: "web", serverStatus: "Offline" });    
+  }
+
+  constructor() { 
 
   }
 
@@ -27,13 +36,7 @@ export class ServersComponent implements OnInit {
     // }, 2000);
   }
 
-  OnCreateServer() {
-    this.serversList.push(this.serverName);
-    this.serverCreated = true;
-    this.serverCreatedStatus = "Server Created! Name is " + this.serverName;
-  }
-
-  getColor(){
+  getColor() {
     return this.serverCreated === true ? "black" : "pink";
   }
 }

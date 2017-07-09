@@ -7,5 +7,8 @@
   </div>
 
   <h1>New Componenet</h1>
-  <app-servers></app-servers>
+  <app-servers (createServerEvent)="OnServerAdded($event)"></app-servers>
+
+
+  <app-server *ngFor="let server of serversList" [serverElem]="server"></app-server>
 </div>

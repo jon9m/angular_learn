@@ -1,10 +1,11 @@
-import {Component} from '@angular/core'
+import { Component, Input, EventEmitter } from '@angular/core'
 
 @Component({
-    selector:'app-server',
-    templateUrl:'./server.component.html',
+    selector: 'app-server',
+    templateUrl: './server.component.html',
     styles: ['p{background-color:pink}']
-}) 
+})
 export class ServerComponent {
-    status:string = 'Offline';
+
+    @Input("serverElem") serverElement: { serverName: string, serverType: String, serverStatus: String };
 }
