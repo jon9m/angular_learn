@@ -11,4 +11,12 @@
 
 
   <app-server *ngFor="let server of serversList" [serverElem]="server"></app-server>
+
+
+  <p appBasicHighlight>Basic attribute directive</p>
+
+  <p appBetterHighlite [highligtColor]="'red'" [defaultColor]="'green'">Basic attribute directive</p>
+
+  <p *appUnless="unlessValue">Unless custom structural directive</p>
+
 </div>
